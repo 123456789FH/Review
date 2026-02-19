@@ -1,579 +1,0 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>لوحة اختبار القسمة التفاعلية (١–١٥)</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
-
-  <style>
-    body { font-family: 'Tajawal', sans-serif; background-color: #f0fdf4; }
-    .card { transition: transform 0.2s; }
-    .card:hover { transform: translateY(-2px); }
-    .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; }
-    .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; }
-    .soft-shadow { box-shadow: 0 18px 45px rgba(2,6,23,.08); }
-    .input-ok { border-color:#22c55e !important; background:#f0fdf4 !important; }
-    .input-bad { border-color:#ef4444 !important; background:#fef2f2 !important; }
-
-    /* ✅ عرض العمليات RTL الحقيقي: المقسوم/العدد الكبير يمين */
-    .eqn{
-      display:inline-flex;
-      direction: rtl;
-      unicode-bidi: isolate;
-      align-items:center;
-      gap:.35rem;
-      font-weight:800;
-      letter-spacing:.2px;
-      white-space:nowrap;
-    }
-    .eqn .num{ direction:ltr; unicode-bidi:isolate; }
-    .eqn .sym{ opacity:.9; }
-
-    .qno{ font-weight:800; color:#0f172a; }
-  </style>
-</head>
-
-<body class="p-4 md:p-8">
-  <div class="max-w-6xl mx-auto">
-
-    <!-- Header -->
-    <header class="bg-green-600 text-white rounded-2xl p-6 mb-8 soft-shadow relative overflow-hidden">
-      <div class="absolute top-0 right-0 w-40 h-40 bg-green-500 rounded-full -mr-20 -mt-20 opacity-50"></div>
-      <div class="absolute bottom-0 left-0 w-44 h-44 bg-green-500 rounded-full -ml-24 -mb-24 opacity-30"></div>
-
-      <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-4">
-        <!-- ✅ الشعار -->
-        <div class="flex items-center gap-3">
-          <img data-logo style="display:none"
-               alt="شعار ملتقى التعليم التفاعلي"
-               class="w-14 h-14 rounded-full bg-white p-1 object-contain shadow-lg ring-2 ring-white/40">
-        </div>
-
-        <div class="text-center flex-1">
-          <h1 class="text-3xl font-bold mb-1">لوحة اختبار القسمة التفاعلية</h1>
-          <p class="text-green-100 text-lg">الأسئلة (١–١٥) — ترتيب العمليات من اليمين إلى اليسار</p>
-        </div>
-
-        <div class="hidden md:flex items-center gap-2 text-sm text-green-100">
-          <span class="px-3 py-1 rounded-full bg-white/10 border border-white/15">رياضيات</span>
-          <span class="px-3 py-1 rounded-full bg-white/10 border border-white/15">مراجعة</span>
-        </div>
-      </div>
-    </header>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-      <!-- العمود الأيسر -->
-      <div class="md:col-span-1 space-y-6">
-
-        <!-- (١–٢) صح/خطأ -->
-        <section class="bg-white rounded-xl shadow-md p-5 border-r-4 border-blue-500 card">
-          <h2 class="text-xl font-bold text-blue-700 mb-4 flex items-center gap-2">
-            <span>📝</span> (١–٢) صح/خطأ — مفاهيم القسمة
-          </h2>
-
-          <div class="space-y-4">
-            <div class="p-3 border rounded-lg bg-gray-50 transition-all" id="q1-container">
-              <p class="text-sm mb-2"><span class="qno">١)</span> المقسوم هو ناتج مسألة القسمة.</p>
-              <div class="flex gap-2">
-                <button onclick="handleTF(1, false)" class="px-4 py-1 rounded bg-red-100 text-red-700 border border-red-200 hover:bg-red-200">خطأ (✗)</button>
-                <button onclick="handleTF(1, true)"  class="px-4 py-1 rounded bg-green-100 text-green-700 border border-green-200 hover:bg-green-200">صح (✓)</button>
-              </div>
-            </div>
-
-            <div class="p-3 border rounded-lg bg-gray-50 transition-all" id="q2-container">
-              <p class="text-sm mb-2">
-                <span class="qno">٢)</span>
-                في الجملة العددية:
-                <span class="eqn">
-                  <span class="num">١٦</span><span class="sym">÷</span><span class="num">٢</span><span class="sym">=</span><span class="num">٨</span>
-                </span>
-                ، المقسوم عليه هو ٢، وناتج القسمة ٨.
-              </p>
-              <div class="flex gap-2">
-                <button onclick="handleTF(2, true)"  class="px-4 py-1 rounded bg-green-100 text-green-700 border border-green-200 hover:bg-green-200">صح (✓)</button>
-                <button onclick="handleTF(2, false)" class="px-4 py-1 rounded bg-red-100 text-red-700 border border-red-200 hover:bg-red-200">خطأ (✗)</button>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- (١١) اختيار من متعدد -->
-        <section class="bg-white rounded-xl shadow-md p-5 border-r-4 border-purple-500 card">
-          <h2 class="text-xl font-bold text-purple-700 mb-4 flex items-center gap-2">
-            <span>💡</span> (١١) اختيار من متعدد — التحقق
-          </h2>
-
-          <p class="text-sm text-gray-700 mb-3">
-            حل عبد الرحمن مسألة القسمة:
-            <span class="eqn">
-              <span class="num">٥٦</span><span class="sym">÷</span><span class="num">٧</span><span class="sym">=</span><span class="num">٨</span>
-            </span>
-            . فأي مسألة أستعمل للتحقق من إجابته؟
-          </p>
-
-          <div class="grid grid-cols-1 gap-2">
-            <button id="q11-opt-a" onclick="handleChoice(11, 'a')" class="p-2 border rounded hover:bg-purple-50 text-right">
-              (أ) <span class="eqn"><span class="num">٥٦</span><span class="sym">+</span><span class="num">٧</span></span>
-            </button>
-            <button id="q11-opt-b" onclick="handleChoice(11, 'b')" class="p-2 border rounded hover:bg-purple-50 text-right">
-              (ب) <span class="eqn"><span class="num">٧</span><span class="sym">×</span><span class="num">٨</span></span>
-            </button>
-            <button id="q11-opt-c" onclick="handleChoice(11, 'c')" class="p-2 border rounded hover:bg-purple-50 text-right">
-              (ج) <span class="eqn"><span class="num">٨</span><span class="sym">+</span><span class="num">٧</span></span>
-            </button>
-            <button id="q11-opt-d" onclick="handleChoice(11, 'd')" class="p-2 border rounded hover:bg-purple-50 text-right">
-              (د) <span class="eqn"><span class="num">٥٦</span><span class="sym">÷</span><span class="num">٧</span></span>
-            </button>
-          </div>
-
-          <p class="text-xs text-gray-500 mt-3">تلميح: للتحقق من القسمة نستعمل الضرب.</p>
-        </section>
-
-        <!-- (١٣) اختيار من متعدد -->
-        <section class="bg-white rounded-xl shadow-md p-5 border-r-4 border-amber-500 card">
-          <h2 class="text-xl font-bold text-amber-700 mb-4 flex items-center gap-2">
-            <span>🥔</span> (١٣) اختيار من متعدد — قسمة بالتساوي
-          </h2>
-
-          <p class="text-sm text-gray-700 mb-3">
-            وضع طباخ ١٦ حبّة بطاطس في إناءين بالتساوي. فأي جملة عددية تبين عدد الحبّات في كل إناء؟
-          </p>
-
-          <div class="grid grid-cols-1 gap-2">
-            <button id="q13-opt-a" onclick="handleChoice(13, 'a')" class="p-2 border rounded hover:bg-amber-50 text-right">
-              (أ) <span class="eqn"><span class="num">١٦</span><span class="sym">+</span><span class="num">٢</span><span class="sym">=</span><span class="num">١٨</span></span>
-            </button>
-            <button id="q13-opt-b" onclick="handleChoice(13, 'b')" class="p-2 border rounded hover:bg-amber-50 text-right">
-              (ب) <span class="eqn"><span class="num">١٦</span><span class="sym">−</span><span class="num">٢</span><span class="sym">=</span><span class="num">١٤</span></span>
-            </button>
-            <button id="q13-opt-c" onclick="handleChoice(13, 'c')" class="p-2 border rounded hover:bg-amber-50 text-right">
-              (ج) <span class="eqn"><span class="num">١٦</span><span class="sym">×</span><span class="num">٢</span><span class="sym">=</span><span class="num">٣٢</span></span>
-            </button>
-            <button id="q13-opt-d" onclick="handleChoice(13, 'd')" class="p-2 border rounded hover:bg-amber-50 text-right">
-              (د) <span class="eqn"><span class="num">١٦</span><span class="sym">÷</span><span class="num">٢</span><span class="sym">=</span><span class="num">٨</span></span>
-            </button>
-          </div>
-
-          <p class="text-xs text-gray-500 mt-3">تلميح: “بالتساوي” تعني نقسم على عدد الأوعية.</p>
-        </section>
-
-      </div>
-
-      <!-- العمود الأيمن -->
-      <div class="md:col-span-2 space-y-6">
-
-        <!-- (٣–١٠) نواتج القسمة -->
-        <section class="bg-white rounded-xl shadow-md p-5 border-r-4 border-green-500 card">
-          <div class="flex items-center justify-between gap-3 mb-4">
-            <h2 class="text-xl font-bold text-green-700 flex items-center gap-2">
-              <span>🔢</span> (٣–١٠) أجد ناتج القسمة
-            </h2>
-            <div class="text-xs text-gray-500 bg-green-50 border border-green-100 px-3 py-1 rounded-full">
-              اكتب الناتج
-            </div>
-          </div>
-
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-
-            <div class="flex flex-col gap-1">
-              <label class="text-xs text-gray-700">
-                <span class="qno">٣)</span>
-                <span class="eqn"><span class="num">٢٨</span><span class="sym">÷</span><span class="num">٤</span><span class="sym">=</span></span>
-              </label>
-              <input type="text" inputmode="numeric" data-ans="7"
-                     class="calc-input border-2 p-2 rounded-lg text-center focus:border-green-500 outline-none" placeholder="؟">
-            </div>
-
-            <div class="flex flex-col gap-1">
-              <label class="text-xs text-gray-700">
-                <span class="qno">٤)</span>
-                <span class="eqn"><span class="num">٢١</span><span class="sym">÷</span><span class="num">٣</span><span class="sym">=</span></span>
-              </label>
-              <input type="text" inputmode="numeric" data-ans="7"
-                     class="calc-input border-2 p-2 rounded-lg text-center focus:border-green-500 outline-none" placeholder="؟">
-            </div>
-
-            <div class="flex flex-col gap-1">
-              <label class="text-xs text-gray-700">
-                <span class="qno">٥)</span>
-                <span class="eqn"><span class="num">٣٦</span><span class="sym">÷</span><span class="num">٦</span><span class="sym">=</span></span>
-              </label>
-              <input type="text" inputmode="numeric" data-ans="6"
-                     class="calc-input border-2 p-2 rounded-lg text-center focus:border-green-500 outline-none" placeholder="؟">
-            </div>
-
-            <div class="flex flex-col gap-1">
-              <label class="text-xs text-gray-700">
-                <span class="qno">٦)</span>
-                <span class="eqn"><span class="num">٤٢</span><span class="sym">÷</span><span class="num">٧</span><span class="sym">=</span></span>
-              </label>
-              <input type="text" inputmode="numeric" data-ans="6"
-                     class="calc-input border-2 p-2 rounded-lg text-center focus:border-green-500 outline-none" placeholder="؟">
-            </div>
-
-            <div class="flex flex-col gap-1">
-              <label class="text-xs text-gray-700">
-                <span class="qno">٧)</span>
-                <span class="eqn"><span class="num">٧٢</span><span class="sym">÷</span><span class="num">٨</span><span class="sym">=</span></span>
-              </label>
-              <input type="text" inputmode="numeric" data-ans="9"
-                     class="calc-input border-2 p-2 rounded-lg text-center focus:border-green-500 outline-none" placeholder="؟">
-            </div>
-
-            <div class="flex flex-col gap-1">
-              <label class="text-xs text-gray-700">
-                <span class="qno">٨)</span>
-                <span class="eqn"><span class="num">٨١</span><span class="sym">÷</span><span class="num">٩</span><span class="sym">=</span></span>
-              </label>
-              <input type="text" inputmode="numeric" data-ans="9"
-                     class="calc-input border-2 p-2 rounded-lg text-center focus:border-green-500 outline-none" placeholder="؟">
-            </div>
-
-            <div class="flex flex-col gap-1">
-              <label class="text-xs text-gray-700">
-                <span class="qno">٩)</span>
-                <span class="eqn"><span class="num">٤٨</span><span class="sym">÷</span><span class="num">٦</span><span class="sym">=</span></span>
-              </label>
-              <input type="text" inputmode="numeric" data-ans="8"
-                     class="calc-input border-2 p-2 rounded-lg text-center focus:border-green-500 outline-none" placeholder="؟">
-            </div>
-
-            <div class="flex flex-col gap-1">
-              <label class="text-xs text-gray-700">
-                <span class="qno">١٠)</span>
-                <span class="eqn"><span class="num">٤٥</span><span class="sym">÷</span><span class="num">٥</span><span class="sym">=</span></span>
-              </label>
-              <input type="text" inputmode="numeric" data-ans="9"
-                     class="calc-input border-2 p-2 rounded-lg text-center focus:border-green-500 outline-none" placeholder="؟">
-            </div>
-
-          </div>
-
-          <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <button onclick="checkCalculations()"
-                    class="w-full bg-green-600 text-white py-2 rounded-lg font-bold hover:bg-green-700 transition">
-              تحقق من النواتج
-            </button>
-            <button onclick="resetInputs('.calc-input')"
-                    class="w-full bg-white text-green-700 py-2 rounded-lg font-bold border-2 border-green-200 hover:bg-green-50 transition">
-              إعادة المحاولة
-            </button>
-          </div>
-        </section>
-
-        <!-- (١٢) مسألة لفظية -->
-        <section class="bg-white rounded-xl shadow-md p-5 border-r-4 border-sky-500 card">
-          <h2 class="text-xl font-bold text-sky-700 mb-3 flex items-center gap-2">
-            <span>📮</span> (١٢) مسألة لفظية
-          </h2>
-
-          <p class="text-sm text-gray-700 mb-3">
-            رتبت سارة ٦٤ طابعًا بريديًا في دفتر، ووضعت كل ٨ طوابع في صفحة، فما عدد الصفحات التي استعملتها سارة؟
-          </p>
-
-          <div class="flex flex-col sm:flex-row gap-3 sm:items-center">
-            <input id="q12-answer" type="text" inputmode="numeric"
-                   class="w-32 p-2 border-2 rounded text-center outline-none focus:border-sky-500" placeholder="؟">
-            <button onclick="checkWord(12, 'q12-answer', 8)"
-                    class="bg-sky-600 text-white px-5 py-2 rounded font-bold hover:bg-sky-700">
-              تحقق
-            </button>
-            <button onclick="resetInputs('#q12-answer')"
-                    class="bg-white text-sky-700 px-5 py-2 rounded font-bold border-2 border-sky-200 hover:bg-sky-50">
-              إعادة
-            </button>
-          </div>
-
-          <p class="text-xs text-gray-500 mt-3">
-            فكرة الحل:
-            <span class="eqn"><span class="num">٦٤</span><span class="sym">÷</span><span class="num">٨</span><span class="sym">=</span><span class="num">٨</span></span>
-          </p>
-        </section>
-
-        <!-- (١٤) جدول -->
-        <section class="bg-white rounded-xl shadow-md p-5 border-r-4 border-orange-500 card">
-          <h2 class="text-xl font-bold text-orange-700 mb-4 flex items-center gap-2">
-            <span>🏊</span> (١٤) خطة "أعمل جدولًا"
-          </h2>
-
-          <p class="text-sm text-gray-600 mb-4">سبح ياسر يوم السبت ٥ دورات، وكل يوم يزيد ٥ دورات. أكمل الجدول:</p>
-
-          <div class="overflow-x-auto">
-            <table class="w-full text-center border-collapse">
-              <thead>
-                <tr class="bg-orange-50">
-                  <th class="border p-2 text-xs md:text-sm">اليوم</th>
-                  <th class="border p-2 text-xs md:text-sm">السبت</th>
-                  <th class="border p-2 text-xs md:text-sm">الأحد</th>
-                  <th class="border p-2 text-xs md:text-sm">الاثنين</th>
-                  <th class="border p-2 text-xs md:text-sm">الثلاثاء</th>
-                  <th class="border p-2 text-xs md:text-sm">الأربعاء</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="border p-2 bg-gray-50 font-bold text-xs md:text-sm">الدورات</td>
-                  <td class="border p-2">٥</td>
-                  <td class="border p-2"><input type="text" inputmode="numeric" data-ans="10" class="table-input w-14 text-center border-2 rounded p-1 outline-none focus:border-orange-500" placeholder="؟"></td>
-                  <td class="border p-2"><input type="text" inputmode="numeric" data-ans="15" class="table-input w-14 text-center border-2 rounded p-1 outline-none focus:border-orange-500" placeholder="؟"></td>
-                  <td class="border p-2"><input type="text" inputmode="numeric" data-ans="20" class="table-input w-14 text-center border-2 rounded p-1 outline-none focus:border-orange-500" placeholder="؟"></td>
-                  <td class="border p-2"><input type="text" inputmode="numeric" data-ans="25" class="table-input w-14 text-center border-2 rounded p-1 outline-none focus:border-orange-500" placeholder="؟"></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="mt-4 p-3 bg-orange-50 rounded-lg flex flex-col sm:flex-row gap-3 sm:justify-between sm:items-center">
-            <span class="text-sm font-bold">المجموع الكلي:</span>
-            <div class="flex gap-2 items-center">
-              <input type="text" inputmode="numeric" id="total-laps"
-                     class="w-24 p-2 border-2 rounded text-center outline-none focus:border-orange-500" placeholder="؟">
-              <button onclick="checkTable()" class="bg-orange-600 text-white px-4 py-2 rounded text-sm font-bold hover:bg-orange-700">
-                تأكد
-              </button>
-              <button onclick="resetInputs('.table-input, #total-laps')" class="bg-white text-orange-700 px-4 py-2 rounded text-sm font-bold border-2 border-orange-200 hover:bg-orange-50">
-                إعادة
-              </button>
-            </div>
-          </div>
-
-          <p class="mt-3 text-xs text-gray-500">ملاحظة: المجموع الصحيح ٧٥.</p>
-        </section>
-
-        <!-- (١٥) مسألة -->
-        <section class="bg-white rounded-xl shadow-md p-5 border-r-4 border-rose-500 card">
-          <h2 class="text-xl font-bold text-rose-700 mb-3 flex items-center gap-2">
-            <span>🥟</span> (١٥) اكتب جملة عددية — مسألة
-          </h2>
-
-          <p class="text-sm text-gray-700 mb-3">
-            صنع خباز ٤٨ فطيرة لحفلة مدرسية، إذا وضع كل ٨ منها في صينية، فما عدد الصواني التي استعملها؟
-          </p>
-
-          <div class="flex flex-col sm:flex-row gap-3 sm:items-center">
-            <input id="q15-answer" type="text" inputmode="numeric"
-                   class="w-32 p-2 border-2 rounded text-center outline-none focus:border-rose-500" placeholder="؟">
-            <button onclick="checkWord(15, 'q15-answer', 6)"
-                    class="bg-rose-600 text-white px-5 py-2 rounded font-bold hover:bg-rose-700">
-              تحقق
-            </button>
-            <button onclick="resetInputs('#q15-answer')" class="bg-white text-rose-700 px-5 py-2 rounded font-bold border-2 border-rose-200 hover:bg-rose-50">
-              إعادة
-            </button>
-          </div>
-
-          <p class="text-xs text-gray-500 mt-3">
-            الجملة العددية:
-            <span class="eqn"><span class="num">٤٨</span><span class="sym">÷</span><span class="num">٨</span><span class="sym">=</span><span class="num">٦</span></span>
-          </p>
-        </section>
-
-      </div>
-    </div>
-
-    <!-- Footer -->
-    <div class="mt-8 bg-blue-50 p-6 rounded-2xl border-2 border-dashed border-blue-200 text-center">
-      <h3 class="text-xl font-bold text-blue-800 mb-2 italic">"الرياضيات هي لغة العقل"</h3>
-      <p class="text-blue-600 mb-4">استخدم اللوحة للمراجعة المستمرة قبل الاختبارات.</p>
-
-      <div class="pt-4 border-t border-blue-200/70 flex flex-col md:flex-row items-center justify-between gap-3">
-        <div class="flex items-center gap-2 text-sm text-blue-800 font-bold flex-wrap justify-center">
-          <span>أ/ فاطمة هزازي</span>
-          <span class="text-blue-400">•</span>
-          <span>ملتقى معلمي ومعلمات الرياضيات</span>
-          <span class="text-blue-400">•</span>
-          <span>ملتقى التعليم التفاعلي</span>
-        </div>
-
-        <!-- ✅ شعار صغير في التذييل -->
-        <div class="flex items-center gap-2">
-          <img data-logo style="display:none"
-               alt="شعار"
-               class="w-10 h-10 rounded-full bg-white p-1 object-contain border shadow">
-        </div>
-      </div>
-    </div>
-
-    <!-- Feedback Toast -->
-    <div id="feedback"
-         class="fixed bottom-4 left-4 right-4 md:left-auto md:w-96 bg-white shadow-2xl rounded-xl p-4 transform translate-y-40 transition-transform duration-300 border-2 border-green-500 hidden z-50">
-      <div class="flex items-start gap-3">
-        <span id="feedback-icon" class="text-2xl">🌟</span>
-        <div class="flex-1">
-          <p id="feedback-text" class="font-bold text-gray-800"></p>
-          <p id="feedback-sub" class="text-xs text-gray-500 mt-1"></p>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <script>
-    /* ✅ شعارك مضمّن داخل الملف (Data URI) */
-    const LOGO_DATA = "data:image/webp;base64,UklGRnYlAABXRUJQVlA4IGolAABwXQCdASrYAOoAPt1kq1QmJCMiIu4F8iGJ8c6W7B2jvX0R9zHk5gZkD9n8m8hQdQnL+3r2p2d3GmYJ7yqj1uZgq1hHnqfB3s0yq0w1lJ2mFQH2y+gG0wS4mQe9pJ6QH3qVqvQmQf6+z7qv7pOe5VhV7qR6m0Y+0o3lNwH1KkQ+eJd9o0k5cB+Q0d8v8a3o2d0p0oQ3q8m1Jd9uUuS9q7q9b8n0mT2h4mBqfTqE3y1m7l0bW2c7pHcQjKk0iWwRZl9wZg9lq1v1cC1nXbq4m3cOeG6u4cLQm8r9dOq1+oKXQHc8oQv8iV2m0kY4eGfB6dG6yNQh8l0uKf7VQxkq+4v0HcQJ8f4o0bQm8J+gLQh9a9h8o6dX2L4o2tQF0JwEwq+U+S6cXoGqOe0O+u2n0lqH0cX+6lO+Hq8KQJ0u3rD0d+7m9Q0k+7mZ3p+F7d+qf6b1oV4LQ0m+fXqf3yYlB4m+o1v+f0jYk+gQhV6l0wW0i8mK0n7qf6oZ8mKQJ0lFQhQj0b1mQmD0gAA==";
-
-    // تحويل الأرقام العربية/الإنجليزية
-    const mapArToEn = { "٠":"0","١":"1","٢":"2","٣":"3","٤":"4","٥":"5","٦":"6","٧":"7","٨":"8","٩":"9" };
-    const mapEnToAr = { "0":"٠","1":"١","2":"٢","3":"٣","4":"٤","5":"٥","6":"٦","7":"٧","8":"٨","9":"٩" };
-
-    function normalizeDigits(str="") {
-      return String(str).replace(/[٠-٩]/g, d => mapArToEn[d]).replace(/\s+/g,'').trim();
-    }
-    function toArabicDigits(str="") {
-      return String(str).replace(/[0-9]/g, d => mapEnToAr[d]);
-    }
-    function parseNum(val) {
-      const s = normalizeDigits(val);
-      if (!s) return NaN;
-      return Number(s);
-    }
-
-    // ✅ تفعيل الشعار في جميع أماكنه
-    (function mountLogo(){
-      document.querySelectorAll("img[data-logo]").forEach(img => {
-        img.src = LOGO_DATA;
-        img.style.display = "block";
-      });
-    })();
-
-    function showFeedback(text, isSuccess = true, subText = "") {
-      const fb = document.getElementById('feedback');
-      document.getElementById('feedback-text').innerText = toArabicDigits(text);
-      document.getElementById('feedback-sub').innerText = toArabicDigits(subText || "");
-      document.getElementById('feedback-icon').innerText = isSuccess ? '🌟' : '⚠️';
-      fb.style.borderColor = isSuccess ? '#22c55e' : '#ef4444';
-
-      fb.classList.remove('hidden');
-      fb.classList.remove('translate-y-40');
-
-      setTimeout(() => {
-        fb.classList.add('translate-y-40');
-        setTimeout(() => fb.classList.add('hidden'), 300);
-      }, 3200);
-    }
-
-    function markInput(input, ok) {
-      input.classList.remove('input-ok','input-bad');
-      input.classList.add(ok ? 'input-ok' : 'input-bad');
-    }
-
-    function resetInputs(selector) {
-      document.querySelectorAll(selector).forEach(el => {
-        if (el && el.tagName === 'INPUT') el.value = '';
-        if (el) el.classList.remove('input-ok','input-bad');
-      });
-      showFeedback('تمت إعادة المحاولة.', true);
-    }
-
-    // (١–٢) صح/خطأ
-    const tfAnswers = { 1: false, 2: true };
-    const tfExplain = {
-      1: { ok: "إجابة صحيحة! المقسوم هو العدد الذي نقسمه.", bad:"غير صحيح. المقسوم هو العدد الذي يتم تقسيمه، وليس الناتج." },
-      2: { ok: "ممتاز! العبارة صحيحة.", bad:"تحقق من تعريف المقسوم عليه وناتج القسمة." }
-    };
-
-    function handleTF(qNum, chosen) {
-      const container = document.getElementById(`q${qNum}-container`);
-      const correct = tfAnswers[qNum] === chosen;
-      container.classList.remove('correct-bg','wrong-bg');
-      container.classList.add(correct ? 'correct-bg' : 'wrong-bg');
-      showFeedback(correct ? tfExplain[qNum].ok : tfExplain[qNum].bad, correct);
-    }
-
-    // اختيار من متعدد
-    const choiceAnswers = { 11: 'b', 13: 'd' };
-    const choiceExplain = {
-      11: { ok: "صحيح! نتحقق من القسمة بالضرب.", bad:"غير صحيح. الصحيح هو: ٧ × ٨." },
-      13: { ok: "ممتاز! الجملة الصحيحة: ١٦ ÷ ٢ = ٨.", bad:"غير صحيح. الصحيح هو القسمة على ٢." }
-    };
-
-    function handleChoice(qId, chosenOpt) {
-      const correctOpt = choiceAnswers[qId];
-
-      ['a','b','c','d'].forEach(letter => {
-        const b = document.getElementById(`q${qId}-opt-${letter}`);
-        if (!b) return;
-        b.classList.remove('bg-green-500','text-white','border-green-600','bg-red-500','border-red-600');
-        b.classList.add('border');
-      });
-
-      const chosenBtn = document.getElementById(`q${qId}-opt-${chosenOpt}`);
-      const correctBtn = document.getElementById(`q${qId}-opt-${correctOpt}`);
-      const ok = chosenOpt === correctOpt;
-
-      if (ok) {
-        chosenBtn.classList.add('bg-green-500','text-white','border-green-600');
-        showFeedback(choiceExplain[qId].ok, true);
-      } else {
-        chosenBtn.classList.add('bg-red-500','text-white','border-red-600');
-        if (correctBtn) correctBtn.classList.add('bg-green-500','text-white','border-green-600');
-        showFeedback(choiceExplain[qId].bad, false);
-      }
-    }
-
-    // (٣–١٠) تحقق النواتج
-    function checkCalculations() {
-      const inputs = Array.from(document.querySelectorAll('.calc-input'));
-      let correctCount = 0;
-
-      inputs.forEach(input => {
-        const userVal = parseNum(input.value);
-        const ans = Number(input.dataset.ans);
-        const ok = Number.isFinite(userVal) && userVal === ans;
-        markInput(input, ok);
-        if (ok) correctCount++;
-      });
-
-      const total = inputs.length;
-      if (correctCount === total) {
-        showFeedback('كل النواتج صحيحة! بطل الرياضيات.', true, `نتيجتك: ${correctCount}/${total}`);
-      } else {
-        showFeedback('بعض الإجابات غير صحيحة، راجع جدول الضرب.', false, `الصحيح: ${correctCount} من ${total}`);
-      }
-    }
-
-    // (١٢،١٥) مسألة لفظية
-    function checkWord(qNum, inputId, correctAns) {
-      const input = document.getElementById(inputId);
-      const userVal = parseNum(input.value);
-      const ok = Number.isFinite(userVal) && userVal === Number(correctAns);
-      markInput(input, ok);
-
-      if (qNum === 12) {
-        ok ? showFeedback('رائع! عدد الصفحات = ٨.', true, 'لأن: ٦٤ ÷ ٨ = ٨')
-           : showFeedback('تحقق مرة أخرى.', false, 'فكرة: نقسم ٦٤ على ٨');
-      } else if (qNum === 15) {
-        ok ? showFeedback('ممتاز! عدد الصواني = ٦.', true, 'لأن: ٤٨ ÷ ٨ = ٦')
-           : showFeedback('تحقق مرة أخرى.', false, 'فكرة: نقسم ٤٨ على ٨');
-      }
-    }
-
-    // (١٤) الجدول
-    function checkTable() {
-      let tableCorrect = true;
-
-      document.querySelectorAll('.table-input').forEach(input => {
-        const userVal = parseNum(input.value);
-        const ans = Number(input.dataset.ans);
-        const ok = Number.isFinite(userVal) && userVal === ans;
-        markInput(input, ok);
-        if (!ok) tableCorrect = false;
-      });
-
-      const totalEl = document.getElementById('total-laps');
-      const totalVal = parseNum(totalEl.value);
-      const totalOk = Number.isFinite(totalVal) && totalVal === 75;
-      markInput(totalEl, totalOk);
-
-      if (tableCorrect && totalOk) {
-        showFeedback('رائع! الجدول والمجموع صحيحان.', true, 'المجموع = ٧٥');
-      } else {
-        showFeedback('تحقق من نمط الزيادة (+٥) أو من عملية الجمع.', false);
-      }
-    }
-  </script>
-</body>
-</html>
